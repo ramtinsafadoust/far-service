@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>دریافت دستگاه</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../static/add/css/style.css">
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+				<div class="p-4 pt-5">
+		  		<h1><a href="index.html" class="logo">فرمهر رایانه</a></h1>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <a href="/"  aria-expanded="false" class="dropdown-toggle">مدیریت دستگاه ها</a>
+	            
+	          </li>
+	          <li>
+	              <a href="/add">دریافت دستگاه  </a>
+	          </li>
+	          <li>
+ 
+              <a href="/archive">آریش سامانه</a>
+	          </li>
+	          <li>
+              <a href="/logout">خروج</a>
+	          </li>
+	        </ul>
+
+	        <div class="mb-5">
+						<h3 class="h6">Subscribe for newsletter</h3>
+						<form action="#" class="colorlib-subscribe-form">
+	            <div class="form-group d-flex">
+	            	<div class="icon"><span class="icon-paper-plane"></span></div>
+	              <input type="text" class="form-control" placeholder="Enter Email Address">
+	            </div>
+	          </form>
+					</div>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+
+       
+
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">شناسنه</th>
+                <th scope="col">نام و نام خانودگی</th>
+                <th scope="col">نوع دستگاه</th>
+                <th scope="col">مدل دستگاه</th>
+                <th scope="col">تحویل گیرنده</th>
+                <th scope="col">تاریخ دریافت</th>
+                <th scope="col">وضعیت</th>
+                <th scope="col">ویرایش/مشاهده</th>
+                <th scope="col">گزارش تعمیر</th>
+                <th scope="col">تحویل</th>
+
+                
+              </tr>
+            </thead>
+            <tbody>
+                {% for item in values %}
+              <tr>
+                <th scope="row">{{item._id}}</th>
+                
+                <td>{{item.customer_name}}</td>
+                <td>{{item.device_type}}</td>
+                <td>{{item.device_model}}</td>
+                <td>{{item.giver_name}}</td>
+                <td>{{item.in_time}}</td>
+  
+                  
+                  {%  if item.situation==0 %}
+                  
+                  <td>تحویل گرفته شده</td>
+
+                  {% elif item.situation==1 %}
+
+                  <td>تعمیر شده</td>
+                 
+                  {% else %}
+                   
+                  <td>تعمیر نشده</td>
+
+                  {% endif %}
+                
+                <td><input type="button" class="btn-primary" value="ویرایش"/></td>
+                <td><input type="button" class="btn-primary" value="گزارش تعمیر"/></td>
+                <td><input type="button" class="btn-primary" value="تحویل"/></td>
+        
+              
+             
+              </tr>
+
+              {% endfor %}
+      
+            </tbody>
+          </table>
+  
+      </div>
+		</div>
+
+    <script src="../static/add/js/jquery.min.js"></script>
+    <script src="../static/add/js/popper.js"></script>
+    <script src="../static/add/js/bootstrap.min.js"></script>
+    <script src="../static/add/js/main.js"></script>
+  </body>
+</html>
