@@ -1,10 +1,12 @@
-from flask import Flask,redirect,request,flash,session
+from flask import Flask,redirect,request,flash,session,url_for
 from flask_sqlalchemy  import SQLAlchemy
 from flask import render_template
 import secrets
 import random
 import jdatetime
-from flask_login import LoginManager
+from flask_login import LoginManager,UserMixin,login_user,login_required,logout_user,current_user
+
+
 
 app = Flask(__name__)
 secret = secrets.token_urlsafe(32)
@@ -14,6 +16,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
 jdatetime.set_locale('fa_IR')
 
 
+Login_manager= LoginManager()
+Login_manager.init_app(app)
 
 
 
@@ -45,8 +49,8 @@ class devices(db.Model):
 
 
 
-class users(db.Model):
-    _id=db.Column("id",db.Integer,primary_key=True)
+class users(UserMixin,db.Model):
+    id=db.Column("id",db.Integer,primary_key=True)
     username=db.Column(db.String(100),nullable=False,unique=True)
     pasword=db.Column(db.String(100))
     surename=db.Column(db.String(100))
@@ -57,10 +61,18 @@ class users(db.Model):
         return f"devices('{self.username}','{self.password}','{self.surename}','{self.level}')"
 
 
+@Login_manager.user_loader
+def load_user(user_id):
+    return users.query.get(int(user_id))
 
 
 @app.route('/')
+@login_required
 def home():
+    if current_user.is_authenticated:
+        pass
+    else:
+        return redirect(url_for('login'))
 
 
     return render_template("index.html",values=devices.query.all())
@@ -72,10 +84,21 @@ def home():
 @app.route('/login',methods=["POST","GET"])
 def login():
 
-    #newone=devices(tracking_number='6763',customer_name='Ramtin Safadoust',customer_phone='09388826763',device_type='laptop',device_model='Lenovo Y700',serial_number='',property_number="",address='',problem='blue dead',accesories='adapter',other_text="",giver_name='Ali Vatani',in_time='dirooz',out_time='')
-    #db.session.add(newone)
-    #db.session.commit()
+    if request.method=='POST':
+        username=request.form["username"]
+        password=request.form["password"]
+
+        user =users.query.filter_by(username='ramtin.safadoust').first()
+        login_user(user)
+
     return render_template("login.html")
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+
+    return redirect(url_for('login'))
 
 def listtostrint(s):
     str1 = ""  
@@ -123,5 +146,6 @@ def add():
     return render_template('add.html',time=jdatetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S"))
 
 if __name__ == '__main__':
+    app.run(debug=True)
     db.create_all()
     app.run()
