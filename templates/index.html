@@ -8,7 +8,10 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../static/add/css/style.css">
+    <link rel="stylesheet" href="../static/add/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css?family">
+    
+
   </head>
   <body>
 		
@@ -32,7 +35,7 @@
 	          </li>
 	          <li>
  
-              <a href="/archive">آریش سامانه</a>
+              <a href="/archive">آرشیو سامانه</a>
 	          </li>
 	          <li>
               <a href="/logout">خروج</a>
@@ -40,18 +43,18 @@
 	        </ul>
 
 	        <div class="mb-5">
-						<h3 class="h6">Subscribe for newsletter</h3>
+						<h3 class="h6">جست و جو</h3>
 						<form action="#" class="colorlib-subscribe-form">
 	            <div class="form-group d-flex">
 	            	<div class="icon"><span class="icon-paper-plane"></span></div>
-	              <input type="text" class="form-control" placeholder="Enter Email Address">
+	              <input type="text" class="form-control" placeholder="مقدار ">
 	            </div>
 	          </form>
 					</div>
 
 	        <div class="footer">
 	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+						  فرمهر رایانه
 						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 	        </div>
 
@@ -95,21 +98,28 @@
                   
                   {%  if item.situation==0 %}
                   
-                  <td>تحویل گرفته شده</td>
+                  <td style="color: darkviolet;">تحویل گرفته شده</td>
 
                   {% elif item.situation==1 %}
 
-                  <td>تعمیر شده</td>
+                  <td style="color: greenyellow;">تعمیر شده</td>
                  
                   {% else %}
                    
-                  <td>تعمیر نشده</td>
+                  <td style="color: firebrick;">تعمیر نشده</td>
 
                   {% endif %}
                 
-                <td><input type="button" class="btn-primary" value="ویرایش"/></td>
-                <td><input type="button" class="btn-primary" value="گزارش تعمیر"/></td>
-                <td><input type="button" class="btn-primary" value="تحویل"/></td>
+                <td> <button type="submit" class="btn btn-success">
+                  <i class="fa fa-edit fa-lg"></i> 
+              </button></td>
+                <td><button type="submit" class="btn btn-success">
+                  <i class="fa fa-wrench fa-lg"></i> 
+              </button></td>
+                <td><button type="submit" class="btn btn-success">
+                  <i class="fas fa-clipboard-check fa-lg"></i>
+
+              </button></td>
         
               
              
