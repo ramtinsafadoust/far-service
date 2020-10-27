@@ -52,7 +52,7 @@ class devices(db.Model):
 class users(UserMixin,db.Model):
     id=db.Column("id",db.Integer,primary_key=True)
     username=db.Column(db.String(100),nullable=False,unique=True)
-    pasword=db.Column(db.String(100))
+    password=db.Column(db.String(100))
     surename=db.Column(db.String(100))
     level=db.Column(db.Integer)
 
@@ -69,10 +69,8 @@ def load_user(user_id):
 @app.route('/')
 @login_required
 def home():
-    if current_user.is_authenticated:
-        pass
-    else:
-        return redirect(url_for('login'))
+   
+
 
 
     return render_template("index.html",values=devices.query.all())
@@ -85,11 +83,17 @@ def home():
 def login():
 
     if request.method=='POST':
-        username=request.form["username"]
-        password=request.form["password"]
+        usernameform=request.form["username"]
+        passwordform=request.form["password"]
 
-        user =users.query.filter_by(username='ramtin.safadoust').first()
-        login_user(user)
+        user =users.query.filter_by(username=usernameform,password=passwordform).first() 
+        #print (user)
+        #return str(user) 
+        if user!=None:
+            login_user(user)
+            return redirect(url_for('home'))   
+        else:
+            return render_template("login.html",khata="نام کاربری و یا گذرواژه صحیح نمیباشد")
 
     return render_template("login.html")
 
@@ -113,9 +117,11 @@ def listtostrint(s):
 
 
 @app.route('/add',methods=["POST","GET"])
+@login_required
 def add():
-     
+    regby=current_user.surename
     if request.method=="POST":
+        
        # print(request.form.getlist("accessories"))
         accs=(listtostrint(request.form.getlist("accessories")))
         #temp=request.form["customer_phone"]
@@ -143,9 +149,9 @@ def add():
         return redirect('/')
     else:
         pass
-    return render_template('add.html',time=jdatetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S"))
+    return render_template('add.html',time=jdatetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S"),regby=regby)
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    db.create_all()
+    
+    
     app.run()
