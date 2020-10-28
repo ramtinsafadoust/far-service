@@ -63,11 +63,7 @@
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
-
-       
-
-
-        <table class="table">
+        <table class="table" id="tblTest">
             <thead>
               <tr>
                 <th scope="col">شناسنه</th>
@@ -79,16 +75,13 @@
                 <th scope="col">وضعیت</th>
                 <th scope="col">ویرایش/مشاهده</th>
                 <th scope="col">گزارش تعمیر</th>
-                <th scope="col">تحویل</th>
-
-                
+                <th scope="col">تحویل</th>    
               </tr>
             </thead>
             <tbody>
                 {% for item in values %}
               <tr>
-                <th scope="row">{{item._id}}</th>
-                
+                <th scope="row">{{item._id}} </th>
                 <td>{{item.customer_name}}</td>
                 <td>{{item.device_type}}</td>
                 <td>{{item.device_model}}</td>
@@ -113,13 +106,23 @@
                 <td> <button type="submit" class="btn btn-success">
                   <i class="fa fa-edit fa-lg"></i> 
               </button></td>
-                <td><button type="submit" class="btn btn-success">
+
+
+
+
+                <td><button type="submit" class="btn btn-success"  data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-wrench fa-lg"></i> 
               </button></td>
-                <td><button type="submit" class="btn btn-success">
+    
+
+              
+                <td><button type="submit" class="btn btn-success"  >
                   <i class="fas fa-clipboard-check fa-lg"></i>
 
               </button></td>
+
+
+              
         
               
              
@@ -131,11 +134,90 @@
           </table>
   
       </div>
-		</div>
+    </div>
+    
 
     <script src="../static/add/js/jquery.min.js"></script>
     <script src="../static/add/js/popper.js"></script>
     <script src="../static/add/js/bootstrap.min.js"></script>
     <script src="../static/add/js/main.js"></script>
+
+
+
+
+
+
+          <!-- The Modal -->
+  <div class="modal fade" id="myModal" >
+    <div class="modal-dialog">
+      <div class="modal-content" >
+      
+        <!-- Modal Header -->
+        <div class="modal-header" dir="rtl">
+          <h4 class="modal-title"  >گزارش تعمیر</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+
+        
+        <div class="modal-body">
+
+          
+
+          <!-- Start CheckBox -->
+          <div class="form-check">
+            <label class="form-check-label" style="font-size: larger; color: lightseagreen;">
+              <input type="radio" class="form-check-input" name="optradio" >تعمیر انجام شد
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label" style="font-size: larger;color: tomato;">
+              <input type="radio" class="form-check-input" name="optradio" >تعمیر انجام نشد
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <label class="form-check-label" style="font-size: larger;color: dodgerblue;">
+              <input type="radio" class="form-check-input" name="optradio" >در حال تعمیر
+            </label>
+          </div>
+           <!-- End CheckBox -->
+
+        </br>
+
+
+           <div class="form-group" >
+            <div class="input-group-prepend" dir="rtl">
+              <span class="input-group-text" >شرح کار انجام شده</span>
+            </div>
+            <br>
+            <textarea class="form-control rounded-0" aria-label="With textarea" rows="8" dir="rtl"  style="font-size: larger;" placeholder="توضیحات"></textarea>
+          </div>
+          
+      
+
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer" >
+          <button type="button" class="btn btn-danger" data-dismiss="modal"  >بستن</button>
+
+          
+          <form action="/report" method="POST">
+          <input class="btn btn-primary" type="submit" value="ثبت دستگاه"/>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+
+
   </body>
+  
 </html>
+

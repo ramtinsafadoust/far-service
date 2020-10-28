@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>ویرایش دستگاه</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../static/add/css/style.css">
+		<link rel="stylesheet" href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
+
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+				<div class="p-4 pt-5">
+		  		<h1><a href="index.html" class="logo">فرمهر رایانه</a></h1>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <a href="/"  aria-expanded="false" class="dropdown-toggle">مدیریت دستگاه ها</a>
+	            
+	          </li>
+	          <li>
+	              <a href="/add">دریافت دستگاه  </a>
+	          </li>
+	          <li>
+ 
+              <a href="/archive">آرشیو سامانه</a>
+	          </li>
+	          <li>
+              <a href="/logout">خروج</a>
+	          </li>
+	        </ul>
+
+	        <div class="mb-5">
+						<h3 class="h6">جست و جو</h3>
+						<form action="#" class="colorlib-subscribe-form">
+	            <div class="form-group d-flex">
+	            	<div class="icon"><span class="icon-paper-plane"></span></div>
+	              <input type="text" class="form-control" placeholder="مقدار ">
+	            </div>
+	          </form>
+					</div>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  فرمهر رایانه
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+
+        <h2 class="mb-4">دریافت دستگاه</h2>
+        <form action="#" method="POST">
+			<div class="form-row">
+			  <div class="form-group col-md-6">
+				<label for="inputEmail4">شماره دستگاه</label>
+				<input type="text" class="form-control" id="id" name="id" placeholder="" readonly>
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="inputPassword4">شماره پیگیری</label>
+				<input type="text" class="form-control" id="tracking_number" name="tracking_number" placeholder="" readonly>
+			  </div>
+
+			  <div class="form-group col-md-6">
+				<label for="inputEmail4">نام مشتری</label>
+				<input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="نام و نام خانوادگی" >
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="inputPassword4">شماره تماس</label>
+				<input type="number" class="form-control" id="customer_phone" name="customer_phone" placeholder="۰۹۰۰۰۰۰۰۰۰۰" >
+			  </div>
+
+			  <div class="form-group col-md-4">
+				<label for="inputState">نوع دستگاه</label>
+				<select id="device_type" name="device_type" class="form-control">
+				  <option selected>انتخاب کنید</option>
+				  <option>لپ تاپ</option>
+				  <option>رو میزی</option>
+				  <option>مانیتور</option>
+				  <option>گوشی / تبلت</option>
+				  <option>All In One</option>
+				</select>
+				
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="inputPassword4">برند و مدل</label>
+				<input type="text" class="form-control" id="device_model" name="device_model" placeholder="مثال:    Lenovo Y700" >
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="inputPassword4">شماره سریال</label>
+				<input type="text" class="form-control" id="serial_number" name="serial_number" placeholder="سریال دستگاه" >
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="inputPassword4">شماره اموال</label>
+				<input type="text" class="form-control" id="property_number" name="property_number" placeholder="شماره اموال" >
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label for="inputAddress">آدرس</label>
+			  <input type="text" class="form-control" id="address" name="address" placeholder="رشت لاکانی فرمهر رایانه">
+			</div>
+
+			
+			<div class="form-group">
+				<label for="comment">اشکال ذکر شده توسط مشتری:</label>
+				<textarea class="form-control" rows="5" id="problem" name="problem"></textarea>
+			  </div>
+
+			  <div class="form-group row">
+				<div class="col-sm-2">اقلام همراه</div>
+				<div class="col-sm-10">
+				  <div class="form-check">
+					<input class="form-check-input" type="checkbox" id="adapter" name="accessories" value="شارژر">
+					<label class="form-check-label" for="gridCheck1">
+					  شارژر
+					</label>
+				  </div>
+				  <div class="form-check">
+					<input class="form-check-input" type="checkbox" id="dvd" name="accessories" value="دی وی دی">
+					<label class="form-check-label" for="gridCheck2">
+					  دی وی دی 
+					</label>
+				  </div>
+				  <div class="form-check">
+					<input class="form-check-input" type="checkbox" id="printer" name="accessories" value="پرینتر">
+					<label class="form-check-label" for="gridCheck3">
+					  پرینتر
+					</label>
+				  </div>
+				  <div class="form-check">
+					<input class="form-check-input" type="checkbox" id="bag" name="accessories" value="کیف">
+					<label class="form-check-label" for="gridCheck4">
+					  کیف
+					</label>
+				  </div>
+				  <div class="form-check">
+					<input class="form-check-input" type="checkbox" id="monitor" name="accessories" value="مانیتور">
+					<label class="form-check-label" for="gridCheck5">
+					  مانیتور
+					</label>
+				  </div>
+				</div>
+			  </div>
+	
+			<div class="form-row">
+			  <div class="form-group col-md-6">
+				<label for="inputCity">توضیحات تکمیلی</label>
+				<input type="text" class="form-control" id="other_text" name="other_text">
+				
+			  </div>
+
+			   
+			  <div class="form-group col-md-6">
+				<label for="inputPassword4">تحویل گیرنده</label>
+				<input type="text" class="form-control" id="giver_name" name="giver_name" value='' readonly >
+			  </div>
+
+
+			  <div class="form-group col-md-6">
+				<label for="inputPassword4">زمان ثبت در سیستم</label>
+				<input style="font-size: larger;" type="text" class="form-control" id="in_time" name="in_time" readonly value=''>
+			  </div>
+
+			
+
+
+			</div>
+			<input type="submit" value="ثبت دستگاه"/>
+		  </form>
+      </div>
+		</div>
+
+    <script src="../static/add/js/jquery.min.js"></script>
+    <script src="../static/add/js/popper.js"></script>
+    <script src="../static/add/js/bootstrap.min.js"></script>
+	<script src="../static/add/js/main.js"></script>
+	<script src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"> </script>
+	<script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"> </script>
+
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$("#mydate").persianDatepicker({
+		altField: '#mydate',
+		altFormat: "YYYY/MM/DD",
+		observer: true,
+		format: 'YYYY/MM/DD',
+		initialValue: false,
+		initialValueType: 'persian',
+		autoClose: true,
+		maxDate: 'today',
+		});
+		});
+	</script>
+	
+	
+  </body>
+ 
+</html>
+
+<script type="text/javascript">

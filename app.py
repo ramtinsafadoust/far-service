@@ -22,6 +22,7 @@ Login_manager.init_app(app)
 
 
 
+
 db = SQLAlchemy(app)
 
 class devices(db.Model):
@@ -42,6 +43,7 @@ class devices(db.Model):
     out_time =db.Column(db.String(100))
     situation=db.Column(db.Integer)
     deliverd=db.Column(db.Integer)
+    repair_report=db.Column(db.String(400))
 
 
     def __repr__ (self):
@@ -67,8 +69,10 @@ def load_user(user_id):
 
 
 @app.route('/')
-@login_required
+
 def home():
+    if not current_user.is_authenticated:
+        return redirect(url_for('.login'))
    
 
 
@@ -115,14 +119,30 @@ def listtostrint(s):
     # return string   
     return str1  
 
+@app.route('/edit')
+def edit():
+    if not current_user.is_authenticated:
+        return redirect(url_for('.login'))
+    
+
+    return render_template('edit.html')
+
+@app.route('/report' ,methods=['POST','GET'])
+def report():
+    if request.method=='POST':
+        return "ITS OK"
+
 
 @app.route('/add',methods=["POST","GET"])
-@login_required
 def add():
+    jdatetime.set_locale('fa_IR')
+    if not current_user.is_authenticated:
+        return redirect(url_for('.login'))
+    print(jdatetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S"))
     regby=current_user.surename
     if request.method=="POST":
         
-       # print(request.form.getlist("accessories"))
+        #print(request.form.getlist("accessories"))
         accs=(listtostrint(request.form.getlist("accessories")))
         #temp=request.form["customer_phone"]
         tracking_number=random.randint(1000000,9999999)
@@ -139,7 +159,7 @@ def add():
         giver_name=request.form["giver_name"]
         situation=0
         deliverd=0
-        in_time=request.form["in_time"]
+        in_time=jdatetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S")
 
        #in_time=request.form["in_time"]
        # out_time=request.form["out_time"]
@@ -150,6 +170,9 @@ def add():
     else:
         pass
     return render_template('add.html',time=jdatetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S"),regby=regby)
+
+
+
 
 if __name__ == '__main__':
     
