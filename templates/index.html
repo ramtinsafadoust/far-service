@@ -110,16 +110,20 @@
 
 
 
-                <td><button type="submit" class="btn btn-success"  data-toggle="modal" data-target="#myModal">
+                <td> <button type="button" class="btn btn-success open-modal"  data-toggle="modal" data-target="#modal" >
                   <i class="fa fa-wrench fa-lg"></i> 
               </button></td>
     
 
               
-                <td><button type="submit" class="btn btn-success"  >
+                <td><button type="submit" class="btn btn-success"  data-toggle="modal" data-target="#modaltahvil">
                   <i class="fas fa-clipboard-check fa-lg"></i>
 
               </button></td>
+
+
+
+              <td>{{item._id}}</td>
 
 
               
@@ -127,6 +131,8 @@
               
              
               </tr>
+
+
 
               {% endfor %}
       
@@ -146,75 +152,80 @@
 
 
 
-
-          <!-- The Modal -->
-  <div class="modal fade" id="myModal" >
-    <div class="modal-dialog">
-      <div class="modal-content" >
-      
-        <!-- Modal Header -->
-        <div class="modal-header" dir="rtl">
-          <h4 class="modal-title"  >گزارش تعمیر</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+<!-- The Modal -->
+<div class="modal fade" id="modal" >
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <!-- Modal Header -->
+      <div class="modal-header" dir="rtl">
+        <h4 class="modal-title"  >گزارش تعمیر</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p id="id"></p>
+        <!-- Start CheckBox -->
+        <div class="form-check">
+          <label class="form-check-label" style="font-size: larger; color: lightseagreen;">
+            <input type="radio" class="form-check-input" name="optradio" >تعمیر انجام شد
+          </label>
         </div>
-        
-        <!-- Modal body -->
-
-        
-        <div class="modal-body">
-
-          
-
-          <!-- Start CheckBox -->
-          <div class="form-check">
-            <label class="form-check-label" style="font-size: larger; color: lightseagreen;">
-              <input type="radio" class="form-check-input" name="optradio" >تعمیر انجام شد
-            </label>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label" style="font-size: larger;color: tomato;">
-              <input type="radio" class="form-check-input" name="optradio" >تعمیر انجام نشد
-            </label>
-          </div>
-          <div class="form-check disabled">
-            <label class="form-check-label" style="font-size: larger;color: dodgerblue;">
-              <input type="radio" class="form-check-input" name="optradio" >در حال تعمیر
-            </label>
-          </div>
-           <!-- End CheckBox -->
-
-        </br>
-
-
-           <div class="form-group" >
-            <div class="input-group-prepend" dir="rtl">
-              <span class="input-group-text" >شرح کار انجام شده</span>
-            </div>
-            <br>
-            <textarea class="form-control rounded-0" aria-label="With textarea" rows="8" dir="rtl"  style="font-size: larger;" placeholder="توضیحات"></textarea>
-          </div>
-          
-      
-
-
+        <div class="form-check">
+          <label class="form-check-label" style="font-size: larger;color: tomato;">
+            <input type="radio" class="form-check-input" name="optradio" >تعمیر انجام نشد
+          </label>
         </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer" >
-          <button type="button" class="btn btn-danger" data-dismiss="modal"  >بستن</button>
-
-          
-          <form action="/report" method="POST">
-          <input class="btn btn-primary" type="submit" value="ثبت دستگاه"/>
-          </form>
+        <div class="form-check disabled">
+          <label class="form-check-label" style="font-size: larger;color: dodgerblue;">
+            <input type="radio" class="form-check-input" name="optradio" >در حال تعمیر
+          </label>
         </div>
-        
+         <!-- End CheckBox -->
+      </br>
+         <div class="form-group" >
+          <div class="input-group-prepend" dir="rtl">
+            <span class="input-group-text" >شرح کار انجام شده</span>
+          </div>
+          <br>
+          <textarea class="form-control rounded-0" aria-label="With textarea" rows="8" dir="rtl"  style="font-size: larger;" placeholder="توضیحات"></textarea>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer" >
+        <button type="button" class="btn btn-danger" data-dismiss="modal"  >بستن</button>
+        <form action="/report" method="POST">
+        <input class="btn btn-primary" type="submit" value="ثبت دستگاه"/>
+        </form>
       </div>
     </div>
   </div>
+</div>
 
+<!-- Modal Tahvil -->
+<div class="modal fade" id="modaltahvil" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" dir="rtl">
+        <h5 class="modal-title" id="exampleModalLongTitle" >تحویل به مشتری</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+       <p> آیا از تحویل این دستگاه به صاحب آن مطمئنید؟</p>
+      </div>
+      <div class="modal-footer">
+       
 
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" value="no">خیر</button>
+        <form action="/out" method="POST">
+        <button type="submit" class="btn btn-primary" value="yes" name="yes">بله</button>
 
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
   </body>

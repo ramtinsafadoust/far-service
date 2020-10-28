@@ -81,6 +81,14 @@ def home():
 
 
 
+@app.route('/out', methods=["POST","GET"])
+def out():
+    if request.method=='POST':
+        if request.form['yes']=="yes":
+            return "ok"
+
+    return render_template('index.html')
+
 
 
 @app.route('/login',methods=["POST","GET"])
@@ -127,10 +135,17 @@ def edit():
 
     return render_template('edit.html')
 
+
+
+
 @app.route('/report' ,methods=['POST','GET'])
 def report():
     if request.method=='POST':
         return "ITS OK"
+
+
+
+        
 
 
 @app.route('/add',methods=["POST","GET"])
