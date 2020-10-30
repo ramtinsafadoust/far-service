@@ -127,14 +127,61 @@ def listtostrint(s):
     # return string   
     return str1  
 
-@app.route('/edit')
+@app.route('/edit',methods=['POST','GET'])
 def edit():
     if not current_user.is_authenticated:
         return redirect(url_for('.login'))
-    
+    if request.method=='POST':
+        id=request.form["idd"]
+        print(id)
+        dev =devices.query.filter_by(_id=id).first()
+        #fname=dev.customer_name
+       
 
-    return render_template('edit.html')
+    return render_template('edit.html',dev=dev)
 
+
+@app.route('/edited',methods=['POST','GET'])
+def edited():
+    if request.method=="POST":
+        
+        #print(request.form.getlist("accessories"))
+        id=request.form["id"]
+        accs=(listtostrint(request.form.getlist("accessories")))
+        #temp=request.form["customer_phone"]
+        tracking_number=random.randint(1000000,9999999)
+        customer_name=request.form["customer_name"]
+        customer_phone=request.form["customer_phone"]
+        device_type=request.form["device_type"]
+        device_model=request.form["device_model"]
+        serial_number=request.form["serial_number"]
+        property_number=request.form["property_number"]
+        address=request.form["address"]
+        problem=request.form["problem"]
+        accesories=accs
+        other_text=request.form["other_text"]
+        giver_name=request.form["giver_name"]
+        situation=0
+        deliverd=0
+        in_time=jdatetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S")
+
+        
+        dev =devices.query.filter_by(_id=id).first()
+        dev.tracking_number=tracking_number
+        dev.customer_name=customer_name
+        dev.customer_phone=customer_phone
+        dev.device_type=device_type
+        dev.device_model=device_model
+        dev.serial_number=serial_number
+        dev.property_number=property_number
+        dev.address=address
+        dev.problem=problem
+        dev.accesories=accesories
+        dev.other_text= other_text
+        dev.in_time=in_time
+        session.commit()
+
+    return redirect(url_for('/'))
 
 
 

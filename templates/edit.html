@@ -60,14 +60,14 @@
 	      </div>
     	</nav>
         <!-- Page Content  -->
-      <div id="content" class="p-4 p-md-5 pt-5">
+      <div id="content"  class="p-4 p-md-5 pt-5">
 
-        <h2 class="mb-4">دریافت دستگاه</h2>
-        <form action="#" method="POST">
+        <h2 class="mb-4" dir="rtl">مشاهده / ویرایش</h2>
+        <form action="/edited" method="POST">
 			<div class="form-row">
 			  <div class="form-group col-md-6">
 				<label for="inputEmail4">شماره دستگاه</label>
-				<input type="text" class="form-control" id="id" name="id" placeholder="" readonly>
+				<input type="text" class="form-control" id="id" name="id" placeholder="" readonly value="{{dev._id}}">
 			  </div>
 			  <div class="form-group col-md-6">
 				<label for="inputPassword4">شماره پیگیری</label>
@@ -76,11 +76,11 @@
 
 			  <div class="form-group col-md-6">
 				<label for="inputEmail4">نام مشتری</label>
-				<input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="نام و نام خانوادگی" >
+				<input type="text" class="form-control" id="customer_name" name="customer_name" value="{{dev.customer_name}}" >
 			  </div>
 			  <div class="form-group col-md-6">
 				<label for="inputPassword4">شماره تماس</label>
-				<input type="number" class="form-control" id="customer_phone" name="customer_phone" placeholder="۰۹۰۰۰۰۰۰۰۰۰" >
+				<input type="number" class="form-control" id="customer_phone" name="customer_phone" value="{{dev.customer_phone}}" >
 			  </div>
 
 			  <div class="form-group col-md-4">
@@ -97,26 +97,26 @@
 			  </div>
 			  <div class="form-group col-md-6">
 				<label for="inputPassword4">برند و مدل</label>
-				<input type="text" class="form-control" id="device_model" name="device_model" placeholder="مثال:    Lenovo Y700" >
+				<input type="text" class="form-control" id="device_model" name="device_model" value="{{dev.device_model}}" >
 			  </div>
 			  <div class="form-group col-md-6">
 				<label for="inputPassword4">شماره سریال</label>
-				<input type="text" class="form-control" id="serial_number" name="serial_number" placeholder="سریال دستگاه" >
+				<input type="text" class="form-control" id="serial_number" name="serial_number" value="{{dev.serial_number}}"  >
 			  </div>
 			  <div class="form-group col-md-6">
 				<label for="inputPassword4">شماره اموال</label>
-				<input type="text" class="form-control" id="property_number" name="property_number" placeholder="شماره اموال" >
+				<input type="text" class="form-control" id="property_number" name="property_number" value="{{dev.property_number}}" >
 			  </div>
 			</div>
 			<div class="form-group">
 			  <label for="inputAddress">آدرس</label>
-			  <input type="text" class="form-control" id="address" name="address" placeholder="رشت لاکانی فرمهر رایانه">
+			  <input type="text" class="form-control" id="address" name="address" value="{{dev.address}}">
 			</div>
 
 			
 			<div class="form-group">
 				<label for="comment">اشکال ذکر شده توسط مشتری:</label>
-				<textarea class="form-control" rows="5" id="problem" name="problem"></textarea>
+				<textarea class="form-control" rows="5" id="problem" name="problem"  value="{{dev.problem}}"></textarea>
 			  </div>
 
 			  <div class="form-group row">
@@ -158,20 +158,20 @@
 			<div class="form-row">
 			  <div class="form-group col-md-6">
 				<label for="inputCity">توضیحات تکمیلی</label>
-				<input type="text" class="form-control" id="other_text" name="other_text">
+				<input type="text" class="form-control" id="other_text" name="other_text"  value="{{dev.other_text}}">
 				
 			  </div>
 
 			   
 			  <div class="form-group col-md-6">
 				<label for="inputPassword4">تحویل گیرنده</label>
-				<input type="text" class="form-control" id="giver_name" name="giver_name" value='' readonly >
+				<input type="text" class="form-control" id="giver_name" name="giver_name"  readonly  value="{{dev.giver_name}}">
 			  </div>
 
 
 			  <div class="form-group col-md-6">
 				<label for="inputPassword4">زمان ثبت در سیستم</label>
-				<input style="font-size: larger;" type="text" class="form-control" id="in_time" name="in_time" readonly value=''>
+				<input style="font-size: larger;" type="text" class="form-control" id="in_time" name="in_time" readonly   value="{{dev.in_time}}">
 			  </div>
 
 			
