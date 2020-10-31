@@ -123,31 +123,51 @@
 				<div class="col-sm-2">اقلام همراه</div>
 				<div class="col-sm-10">
 				  <div class="form-check">
-					<input class="form-check-input" type="checkbox" id="adapter" name="accessories" value="شارژر">
+					  {% if 'شارژر' in dev.accesories %}
+						<input class="form-check-input" type="checkbox" id="adapter" name="accessories" value="شارژر" checked>
+					{% else %}
+						<input class="form-check-input" type="checkbox" id="adapter" name="accessories" value="شارژر">
+					{% endif %}
 					<label class="form-check-label" for="gridCheck1">
 					  شارژر
 					</label>
 				  </div>
 				  <div class="form-check">
-					<input class="form-check-input" type="checkbox" id="dvd" name="accessories" value="دی وی دی">
+					{% if 'دی وی دی' in dev.accesories %}
+						<input class="form-check-input" type="checkbox" id="dvd" name="accessories" value="دی وی دی" checked>
+					{% else %}
+						<input class="form-check-input" type="checkbox" id="dvd" name="accessories" value="دی وی دی" >
+					{% endif %}
 					<label class="form-check-label" for="gridCheck2">
 					  دی وی دی 
 					</label>
 				  </div>
 				  <div class="form-check">
-					<input class="form-check-input" type="checkbox" id="printer" name="accessories" value="پرینتر">
+					{% if 'پرینتر' in dev.accesories %}
+						<input class="form-check-input" type="checkbox" id="printer" name="accessories" value="پرینتر" checked>
+					{% else %}
+						<input class="form-check-input" type="checkbox" id="printer" name="accessories" value="پرینتر">
+					{% endif %}
 					<label class="form-check-label" for="gridCheck3">
 					  پرینتر
 					</label>
 				  </div>
 				  <div class="form-check">
+					{% if 'کیف' in dev.accesories %}
+					<input class="form-check-input" type="checkbox" id="bag" name="accessories" value="کیف" checked>
+					{% else %}
 					<input class="form-check-input" type="checkbox" id="bag" name="accessories" value="کیف">
+					{% endif %}
 					<label class="form-check-label" for="gridCheck4">
 					  کیف
 					</label>
 				  </div>
 				  <div class="form-check">
+					{% if 'مانیتور' in dev.accesories %}
+					<input class="form-check-input" type="checkbox" id="monitor" name="accessories" value="مانیتور" checked>
+					{% else %}
 					<input class="form-check-input" type="checkbox" id="monitor" name="accessories" value="مانیتور">
+					{% endif %}
 					<label class="form-check-label" for="gridCheck5">
 					  مانیتور
 					</label>
