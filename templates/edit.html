@@ -71,7 +71,7 @@
 			  </div>
 			  <div class="form-group col-md-6">
 				<label for="inputPassword4">شماره پیگیری</label>
-				<input type="text" class="form-control" id="tracking_number" name="tracking_number" placeholder="" readonly>
+				<input type="text" class="form-control" id="tracking_number" name="tracking_number" value="{{dev.tracking_number}}" readonly>
 			  </div>
 
 			  <div class="form-group col-md-6">
@@ -171,14 +171,21 @@
 
 			  <div class="form-group col-md-6">
 				<label for="inputPassword4">زمان ثبت در سیستم</label>
-				<input style="font-size: larger;" type="text" class="form-control" id="in_time" name="in_time" readonly   value="{{dev.in_time}}">
+				<input style="font-size: larger;" type="text" class="form-control myclass" id="in_time" name="in_time"    value="{{dev.in_time}}">
+				
+
 			  </div>
 
 			
 
 
 			</div>
-			<input type="submit" value="ثبت دستگاه"/>
+			
+
+				<input type="submit" value="ویرایش دستگاه" class="btn btn-primary"/>
+
+			
+		
 		  </form>
       </div>
 		</div>
@@ -194,8 +201,8 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-		$("#mydate").persianDatepicker({
-		altField: '#mydate',
+		$("#in_time").persianDatepicker({
+		altField: '#in_time',
 		altFormat: "YYYY/MM/DD",
 		observer: true,
 		format: 'YYYY/MM/DD',

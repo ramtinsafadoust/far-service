@@ -148,6 +148,7 @@ def edited():
         #print(request.form.getlist("accessories"))
         id=request.form["id"]
         accs=(listtostrint(request.form.getlist("accessories")))
+        
         #temp=request.form["customer_phone"]
         tracking_number=random.randint(1000000,9999999)
         customer_name=request.form["customer_name"]
@@ -163,7 +164,7 @@ def edited():
         giver_name=request.form["giver_name"]
         situation=0
         deliverd=0
-        in_time=jdatetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S")
+        in_time=request.form["in_time"]
 
         
         dev =devices.query.filter_by(_id=id).first()
@@ -179,9 +180,11 @@ def edited():
         dev.accesories=accesories
         dev.other_text= other_text
         dev.in_time=in_time
-        session.commit()
 
-    return redirect(url_for('/'))
+                
+        db.session.commit()
+
+    return redirect(url_for('home'))
 
 
 
