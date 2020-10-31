@@ -121,7 +121,7 @@ def listtostrint(s):
     
     # traverse in the string   
     for ele in s:  
-        str1 += ele + "-"
+        str1 += ele
        # str1 =str1+"  -  " 
     
     # return string   
@@ -143,12 +143,13 @@ def edit():
 
 @app.route('/edited',methods=['POST','GET'])
 def edited():
+    if not current_user.is_authenticated:
+        return redirect(url_for('.login'))
     if request.method=="POST":
         
         #print(request.form.getlist("accessories"))
         id=request.form["id"]
         accs=(listtostrint(request.form.getlist("accessories")))
-        
         #temp=request.form["customer_phone"]
         tracking_number=random.randint(1000000,9999999)
         customer_name=request.form["customer_name"]
@@ -190,11 +191,43 @@ def edited():
 
 @app.route('/report' ,methods=['POST','GET'])
 def report():
+    if not current_user.is_authenticated:
+        return redirect(url_for('.login'))
     if request.method=='POST':
-        return "ITS OK"
+        id=request.form["idd"]
+        report=request.form["report"]
+        st=(listtostrint(request.form.getlist("st")))
+        device=devices.query.filter_by(_id=id).first()
+        device.repair_report=report
+        device.situation=st
+        db.session.commit()
+
+        return redirect(url_for("home"))
+    return "report"
+
+@app.route('/deliver',methods=['POST','GET'])
+def deliver():
+    if not current_user.is_authenticated:
+        return redirect(url_for('.login'))
+    if request.method=='POST':
+        id=request.form["iddd"]
+        device=devices.query.filter_by(_id=id).first()
+        device.deliverd=1
+        device.out_time=jdatetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S")
+        db.session.commit()
+        return redirect(url_for("home"))
+    return "ok"
+
+@app.route('/archive',methods=['POST','GET'])
+def archive():
+    if not current_user.is_authenticated:
+        return redirect(url_for('.login'))
+
+        
+    values=devices.query.all()
 
 
-
+    return render_template('archive.html',values=values)
         
 
 
