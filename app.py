@@ -79,7 +79,7 @@ def home():
     print(user.surename)
 
 
-    return render_template("index.html",values=devices.query.filter_by(deliverd=0),user=user.surename)
+    return render_template("index.html",values=devices.query.filter_by(deliverd=0),surename=user.surename)
 
 
 
@@ -137,10 +137,13 @@ def edit():
         id=request.form["idd"]
         print(id)
         dev =devices.query.filter_by(_id=id).first()
+        g.user = current_user.get_id()
+        user =users.query.filter_by(id=g.user).first() 
+        level=user.level
         #fname=dev.customer_name
        
 
-    return render_template('edit.html',dev=dev)
+    return render_template('edit.html',dev=dev,level=level)
 
 
 @app.route('/edited',methods=['POST','GET'])
@@ -231,6 +234,20 @@ def archive():
 
     return render_template('archive.html',values=values)
         
+
+
+@app.route('/livesearch',methods=['POST','GET'])
+def livesearch():
+    if request.method=='POST':
+        text=request.form['text']
+        posts = devices.query.filter(devices.customer_name.like(text)).all()
+        print(posts)
+
+
+
+    return "LiveSearch"
+
+
 
 
 @app.route('/add',methods=["POST","GET"])
