@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>مدیریت دستگاه ها</title>
+  	<title>آرشیو سامانه</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,7 +29,7 @@
 	        </button>
         </div>
 				<div class="p-4 pt-5">
-		  		<h1><a href="index.html" class="logo">فرمهر رایانه</a></h1>
+		  		<h1><a href="index.html" class="logo">آرشیو</a></h1>
 	        <ul class="list-unstyled components mb-5">
 	          <li class="active">
 	            <a href="/"  aria-expanded="false" class="dropdown-toggle">مدیریت دستگاه ها</a>
@@ -79,9 +79,8 @@
                 <th scope="col">تحویل گیرنده</th>
                 <th scope="col">تاریخ دریافت</th>
                 <th scope="col">وضعیت</th>
-                <th scope="col">ویرایش/مشاهده</th>
-                <th scope="col">گزارش تعمیر</th>
-                <th scope="col">تحویل</th>    
+                <th scope="col">مشاهده</th>
+
               </tr>
             </thead>
             <tbody>
@@ -97,15 +96,15 @@
                   
                   {%  if item.situation==0 %}
                   
-                  <td style="color: darkviolet;">تحویل گرفته شده</td>
+                  <td style="color: #AA00FF ; font-size: larger;">تحویل گرفته شده</td>
 
                   {% elif item.situation==1 %}
 
-                  <td style="color: greenyellow;">تعمیر شده</td>
+                  <td style="color: #00BFA5; font-size: larger;">تعمیر شده</td>
                  
                   {% else %}
                    
-                  <td style="color: firebrick;">تعمیر نشده</td>
+                  <td style="color:#FF0000; font-size: larger;">تعمیر نشده</td>
 
                   {% endif %}
 
@@ -120,32 +119,21 @@
 
 
 
-                <td> <button type="button" class="btn btn-success open-modal btnSelect"  data-toggle="modal" data-target="#modal" >
-                  <i class="fa fa-wrench fa-lg"></i> 
-              </button></td>
-    
-
-              
-                <td><button type="button" class="btn btn-success btnSelect"  data-toggle="modal" data-target="#modaltahvil" >
-                  <i class="fas fa-clipboard-check fa-lg"></i>
-
-              </button></td>
 
 
 
               <td hidden>{{item._id}}</td>
 
 
-              
-        
-              
+
+
              
               </tr>
 
 
 
               {% endfor %}
-              <input id="temp" name="idd" hidden> </input>
+              <input id="temp" name="idd"  hidden> </input>
       
             </tbody>
           </table>
@@ -163,84 +151,6 @@
 
 
 
-<form action="/report" method="POST">
-<!-- The Modal -->
-<div class="modal fade" id="modal" >
-  <div class="modal-dialog">
-    <div class="modal-content" >
-      <!-- Modal Header -->
-      <div class="modal-header" dir="rtl">
-        <h4 class="modal-title"  >گزارش تعمیر</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <!-- Modal body -->
-      <div class="modal-body">
-        <input id="id" name="idd" hidden > </input>
-        <!-- Start CheckBox -->
-        <div class="form-check">
-          <label class="form-check-label" style="font-size: larger; color: lightseagreen;">
-            <input type="radio" class="form-check-input" name="st" value="1" >تعمیر انجام شد
-          </label>
-        </div>
-        <div class="form-check">
-          <label class="form-check-label" style="font-size: larger;color: tomato;">
-            <input type="radio" class="form-check-input" name="st" value="2" >تعمیر انجام نشد
-          </label>
-        </div>
-        <div class="form-check disabled">
-          <label class="form-check-label" style="font-size: larger;color: dodgerblue;">
-            <input type="radio" class="form-check-input" name="st" value="0" >در حال تعمیر
-          </label>
-        </div>
-         <!-- End CheckBox -->
-      </br>
-         <div class="form-group" >
-          <div class="input-group-prepend" dir="rtl">
-            <span class="input-group-text" >شرح کار انجام شده</span>
-          </div>
-          <br>
-          <input  dir="rtl" id="msg" type="text" class="form-control" name="report" placeholder="گزارش تعمیر">
-        </div>
-      </div>
-      <!-- Modal footer -->
-      <div class="modal-footer" >
-        <button type="button" class="btn btn-danger" data-dismiss="modal"  >بستن</button>
-        
-        <input class="btn btn-primary" type="submit" value="ثبت گزارش"/>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Tahvil -->
-<form action="/deliver" method="POST"> 
-<div class="modal fade" id="modaltahvil" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header" dir="rtl">
-        <input id="iddd" name="iddd" hidden > </input>
-        <h5 class="modal-title" id="exampleModalLongTitle" >تحویل به مشتری</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" >
-       <p> آیا از تحویل این دستگاه به صاحب آن مطمئنید؟</p>
-      </div>
-      <div class="modal-footer">
-       
-
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" value="no">خیر</button>
-        <form action="/out" method="POST">
-        <button type="submit" class="btn btn-primary" value="yes" name="yes">بله</button>
-
-      </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
 
 $(document).ready(function(){
@@ -252,7 +162,7 @@ $("#tblTest").on('click','.btnSelect',function(){
      
      var col1=currentRow.find("td:eq(0)").text(); // get current row 1st TD value
      var col2=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
-     var col3=currentRow.find("td:eq(9)").text(); // get current row 3rd TD
+     var col3=currentRow.find("td:eq(7)").text(); // get current row 3rd TD
      var data=col3;
      
      //alert(data);

@@ -1,4 +1,4 @@
-from flask import Flask,redirect,request,flash,session,url_for
+from flask import Flask,redirect,request,flash,session,url_for,g
 from flask_sqlalchemy  import SQLAlchemy
 from flask import render_template
 import secrets
@@ -73,11 +73,13 @@ def load_user(user_id):
 def home():
     if not current_user.is_authenticated:
         return redirect(url_for('.login'))
-   
+    g.user = current_user.get_id()
+
+    user =users.query.filter_by(id=g.user).first() 
+    print(user.surename)
 
 
-
-    return render_template("index.html",values=devices.query.all())
+    return render_template("index.html",values=devices.query.filter_by(deliverd=0),user=user.surename)
 
 
 
@@ -224,7 +226,7 @@ def archive():
         return redirect(url_for('.login'))
 
         
-    values=devices.query.all()
+    values=devices.query.filter_by(deliverd=1)
 
 
     return render_template('archive.html',values=values)

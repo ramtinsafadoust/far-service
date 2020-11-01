@@ -124,7 +124,7 @@
 				<div class="col-sm-10">
 				  <div class="form-check">
 					  {% if 'شارژر' in dev.accesories %}
-						<input class="form-check-input" type="checkbox" id="adapter" name="accessories" value="شارژر" checked>
+						<input class="form-check-input" type="checkbox" id="adapter" name="accessories" value="شارژر" checked >
 					{% else %}
 						<input class="form-check-input" type="checkbox" id="adapter" name="accessories" value="شارژر">
 					{% endif %}
@@ -193,9 +193,29 @@
 				<label for="inputPassword4">زمان ثبت در سیستم</label>
 				<input style="font-size: larger;" type="text" class="form-control myclass" id="in_time" name="in_time"    value="{{dev.in_time}}">
 				
-
 			  </div>
 
+			  <div class="form-group col-md-6">
+				<label for="inputPassword4">زمان خروج از سامانه</label>
+				<input style="font-size: larger;" type="text" class="form-control myclass" id="out_time" name="out_time"    value="{{dev.out_time}}" readonly>
+				
+			  </div>
+
+			  {%  if dev.repair_report==None %}
+			  <div class="form-group col-md-6" >
+				<label >گزارش تعمیر</label>
+				<input style="font-size: larger;" type="text" class="form-control myclass" id="out_time" name="out_time"    value="" readonly>
+				
+			  </div>	
+
+			  {% else %}
+			  <div class="form-group col-md-6" >
+				<label >گزارش تعمیر</label>
+				<input style="font-size: larger;" type="text" class="form-control myclass" id="out_time" name="out_time"    value="{{dev.repair_report}}" readonly>
+				
+			  </div>	
+
+			  {% endif %}
 			
 
 
