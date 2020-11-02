@@ -1,10 +1,11 @@
-from flask import Flask,redirect,request,flash,session,url_for,g
+from flask import Flask,redirect,request,flash,session,url_for,g,jsonify,json
 from flask_sqlalchemy  import SQLAlchemy
 from flask import render_template
 import secrets
 import random
 import jdatetime
 from flask_login import LoginManager,UserMixin,login_user,login_required,logout_user,current_user
+
 
 
 
@@ -49,6 +50,24 @@ class devices(db.Model):
     def __repr__ (self):
         return f"devices('{self.tracking_number}','{self.customer_name}','{self.customer_phone}','{self.device_type}','{self.device_model}','{self.serial_number}','{self.property_number}','{self.address}','{self.problem}','{self.accesories}','{self.other_text}','{self.giver_name}','{self.in_time}','{self.out_time}','{self.situation}','{self.deliverd}')"
 
+    def as_dict(self):
+        #return{'_id':self._id}
+       # return{'tracking_number':self.tracking_number}
+        return{'customer_name':self.customer_name}
+       # return{'customer_phone':self.customer_phone}
+       # return{'device_type':self.device_type}
+       # return{'device_model':self.device_model}
+       # return{'serial_number':self.serial_number}
+       # return{'property_number':self.property_number}
+      #  return{'address':self.address}
+      #  return{'problem':self.problem}
+     #   return{'accesories':self.accesories}
+      #  return{'other_text':self.other_text}
+      #  return{'giver_name':self.giver_name}
+      #  return{'in_time':self.in_time}
+      #  return{'out_time':self.out_time}
+      #  return{'situation':self.situation}
+      #  return{'repair_report':self.repair_report}
 
 
 class users(UserMixin,db.Model):
@@ -240,9 +259,14 @@ def archive():
 def livesearch():
     if request.method=='POST':
         text=request.form['text']
-        posts = devices.query.filter(devices.customer_name.like(text)).all()
-        print(posts)
-
+        search = "%{}%".format(text)
+        posts = devices.query.filter(devices.customer_name.like(search)).all()
+        #print(posts)
+        list_names=[r.as_dict() for r in posts]
+        print(list_names)
+        jsonify(list_names)
+       
+      
 
 
     return "LiveSearch"
@@ -294,4 +318,5 @@ def add():
 if __name__ == '__main__':
     
     
-    app.run()
+    app.run(debug=True)
+    

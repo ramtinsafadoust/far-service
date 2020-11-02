@@ -52,7 +52,8 @@
 						<form action="#" class="colorlib-subscribe-form">
 	            <div class="form-group d-flex">
 	            	<div class="icon"><span class="icon-paper-plane"></span></div>
-	              <input type="text" class="form-control" placeholder="مقدار " id="livebox">
+                <input type="text" class="form-control" placeholder="مقدار " id="livebox">
+              
 	            </div>
 	          </form>
 					</div>
@@ -277,14 +278,14 @@ $("#livebox").on("input",function(e){
     $.ajax({
         method:"POST",
         url:"/livesearch",
-        data:{text:textlivebox}
+        data:{text:textlivebox},
+        success:function(res){
 
+          console.log(res);
+         
 
-
+        }
     }) 
-
-    
-
 });
 });
 
