@@ -52,7 +52,7 @@
 						<form action="/search"  method="POST" class="colorlib-subscribe-form">
 	            <div class="form-group d-flex">
 	            	<div class="icon"><span class="icon-paper-plane"></span></div>
-                <input type="text" class="form-control" placeholder="مقدار " id="livebox" name="searchtext">
+                <input type="text" class="form-control" placeholder="مقدار " id="livebox" name="searchtext" autofocus>
                 <button type="submit" class="btn btn-primary">
                   <i class="fas fa-eye fa-lg"></i>
                 </button>
@@ -77,6 +77,7 @@
             <thead>
               <tr>
                 <th scope="col">شناسنه</th>
+                <th scope="col">شماره پیگیری</th>
                 <th scope="col">نام و نام خانودگی</th>
                 <th scope="col">نوع دستگاه</th>
                 <th scope="col">مدل دستگاه</th>
@@ -92,6 +93,7 @@
                 {% for item in values %}
               <tr>
                 <th scope="row">{{item._id}} </th>
+                <td>{{item.tracking_number}}</td>
                 <td>{{item.customer_name}}</td>
                 <td>{{item.device_type}}</td>
                 <td>{{item.device_model}}</td>
@@ -236,7 +238,6 @@
        
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal" value="no">خیر</button>
-        <form action="/out" method="POST">
         <button type="submit" class="btn btn-primary" value="yes" name="yes">بله</button>
 
       </form>
@@ -256,7 +257,7 @@ $("#tblTest").on('click','.btnSelect',function(){
      
      var col1=currentRow.find("td:eq(0)").text(); // get current row 1st TD value
      var col2=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
-     var col3=currentRow.find("td:eq(9)").text(); // get current row 3rd TD
+     var col3=currentRow.find("td:eq(10)").text(); // get current row 3rd TD
      var data=col3;
      
      //alert(data);

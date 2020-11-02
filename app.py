@@ -109,13 +109,7 @@ def home():
 
 
 
-@app.route('/out', methods=["POST","GET"])
-def out():
-    if request.method=='POST':
-        if request.form['yes']=="yes":
-            return "ok"
 
-    return render_template('index.html')
 
 
 
@@ -242,8 +236,10 @@ def deliver():
         return redirect(url_for('.login'))
     if request.method=='POST':
         id=request.form["iddd"]
+        print(id)
         device=devices.query.filter_by(_id=id).first()
         device.deliverd=1
+        
         device.out_time=jdatetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S")
         db.session.commit()
         return redirect(url_for("home"))
@@ -269,6 +265,15 @@ def livesearch():
         if text:
             search = "%{}%".format(text)
             posts = devices.query.filter(devices.customer_name.like(search)).all()
+            posts += devices.query.filter(devices._id.like(search)).all()
+            posts += devices.query.filter(devices.tracking_number.like(search)).all()
+            posts += devices.query.filter(devices.customer_phone.like(search)).all()
+            posts += devices.query.filter(devices.device_type.like(search)).all()
+            posts += devices.query.filter(devices.device_model.like(search)).all()
+            posts += devices.query.filter(devices.serial_number.like(search)).all()
+            posts += devices.query.filter(devices.property_number.like(search)).all()
+            posts += devices.query.filter(devices.address.like(search)).all()
+            
             #print(posts)
             return render_template("index.html",values=posts,surename="جست و جو")
         else:
