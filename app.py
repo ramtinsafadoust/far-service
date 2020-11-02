@@ -9,12 +9,14 @@ from flask_login import LoginManager,UserMixin,login_user,login_required,logout_
 
 
 
+
 app = Flask(__name__)
 secret = secrets.token_urlsafe(32)
 app.secret_key = secret
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///devices.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
 jdatetime.set_locale('fa_IR')
+app.config['WHOOSH_BASE']='whoosh'
 
 
 Login_manager= LoginManager()
@@ -27,6 +29,9 @@ Login_manager.init_app(app)
 db = SQLAlchemy(app)
 
 class devices(db.Model):
+
+   # __searchable__ =['tracking_number','customer_name','customer_phone','device_model','serial_number','property_number','address']
+
     _id= db.Column("id", db.Integer , primary_key=True)
     tracking_number =db.Column(db.String(100),nullable=False,unique=True)
     customer_name =db.Column(db.String(100),nullable=False)
@@ -45,6 +50,7 @@ class devices(db.Model):
     situation=db.Column(db.Integer)
     deliverd=db.Column(db.Integer)
     repair_report=db.Column(db.String(400))
+
 
 
     def __repr__ (self):
@@ -68,6 +74,7 @@ class devices(db.Model):
       #  return{'out_time':self.out_time}
       #  return{'situation':self.situation}
       #  return{'repair_report':self.repair_report}
+#wa.whoosh_index(app,devices)
 
 
 class users(UserMixin,db.Model):
@@ -255,16 +262,18 @@ def archive():
         
 
 
-@app.route('/livesearch',methods=['POST','GET'])
+@app.route('/search',methods=['POST','GET'])
 def livesearch():
     if request.method=='POST':
-        text=request.form['text']
-        search = "%{}%".format(text)
-        posts = devices.query.filter(devices.customer_name.like(search)).all()
-        #print(posts)
-        list_names=[r.as_dict() for r in posts]
-        print(list_names)
-        jsonify(list_names)
+        text=request.form['searchtext']
+        if text:
+            search = "%{}%".format(text)
+            posts = devices.query.filter(devices.customer_name.like(search)).all()
+            #print(posts)
+            return render_template("index.html",values=posts,surename="جست و جو")
+        else:
+            return redirect(url_for("home"))
+        
        
       
 

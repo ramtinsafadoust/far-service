@@ -49,10 +49,13 @@
 
 	        <div class="mb-5">
 						<h3 class="h6">جست و جو</h3>
-						<form action="#" class="colorlib-subscribe-form">
+						<form action="/search"  method="POST" class="colorlib-subscribe-form">
 	            <div class="form-group d-flex">
 	            	<div class="icon"><span class="icon-paper-plane"></span></div>
-                <input type="text" class="form-control" placeholder="مقدار " id="livebox">
+                <input type="text" class="form-control" placeholder="مقدار " id="livebox" name="searchtext">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-eye fa-lg"></i>
+                </button>
               
 	            </div>
 	          </form>
